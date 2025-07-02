@@ -1,0 +1,47 @@
+<svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circuit Board Background -->
+  <rect width="120" height="80" rx="4" fill="#1a5f1a"/>
+  
+  <!-- Circuit Traces -->
+  <path d="M10 20H50M70 20H110M10 40H30M50 40H70M90 40H110M10 60H40M60 60H110" stroke="#00ff00" stroke-width="2"/>
+  <path d="M30 10V30M50 10V50M70 10V30M90 30V70M60 50V70" stroke="#00ff00" stroke-width="2"/>
+  
+  <!-- Main Microchip -->
+  <rect x="35" y="25" width="20" height="15" rx="2" fill="#333" stroke="#666" stroke-width="1"/>
+  <rect x="37" y="27" width="16" height="11" rx="1" fill="#000"/>
+  
+  <!-- Chip Pins -->
+  <rect x="32" y="28" width="3" height="1" fill="#c0c0c0"/>
+  <rect x="32" y="31" width="3" height="1" fill="#c0c0c0"/>
+  <rect x="32" y="34" width="3" height="1" fill="#c0c0c0"/>
+  <rect x="32" y="37" width="3" height="1" fill="#c0c0c0"/>
+  
+  <rect x="55" y="28" width="3" height="1" fill="#c0c0c0"/>
+  <rect x="55" y="31" width="3" height="1" fill="#c0c0c0"/>
+  <rect x="55" y="34" width="3" height="1" fill="#c0c0c0"/>
+  <rect x="55" y="37" width="3" height="1" fill="#c0c0c0"/>
+  
+  <!-- Resistors -->
+  <rect x="15" y="18" width="8" height="4" rx="1" fill="#d4af37" stroke="#b8860b"/>
+  <rect x="75" y="18" width="8" height="4" rx="1" fill="#d4af37" stroke="#b8860b"/>
+  <rect x="15" y="58" width="8" height="4" rx="1" fill="#d4af37" stroke="#b8860b"/>
+  
+  <!-- Capacitors -->
+  <circle cx="95" cy="20" r="3" fill="#4169e1" stroke="#1e90ff"/>
+  <circle cx="95" cy="60" r="3" fill="#4169e1" stroke="#1e90ff"/>
+  
+  <!-- Connection Points/Vias -->
+  <circle cx="30" cy="20" r="1.5" fill="#c0c0c0"/>
+  <circle cx="50" cy="20" r="1.5" fill="#c0c0c0"/>
+  <circle cx="70" cy="20" r="1.5" fill="#c0c0c0"/>
+  <circle cx="30" cy="40" r="1.5" fill="#c0c0c0"/>
+  <circle cx="50" cy="40" r="1.5" fill="#c0c0c0"/>
+  <circle cx="70" cy="40" r="1.5" fill="#c0c0c0"/>
+  <circle cx="90" cy="40" r="1.5" fill="#c0c0c0"/>
+  <circle cx="40" cy="60" r="1.5" fill="#c0c0c0"/>
+  <circle cx="60" cy="60" r="1.5" fill="#c0c0c0"/>
+  
+  <!-- Small Components -->
+  <rect x="65" y="58" width="6" height="4" rx="1" fill="#ff4500" stroke="#dc143c"/>
+  <rect x="45" y="58" width="6" height="4" rx="1" fill="#ff4500" stroke="#dc143c"/>
+</svg> 

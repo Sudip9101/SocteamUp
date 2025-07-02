@@ -1,0 +1,257 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SocTeamUp JAMStack Serverless Backend
+
+# Global configuration
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: nodejs18.x
+    Environment:
+      Variables:
+        FRONTEND_URL: !Ref FrontendUrl
+        USERS_TABLE: !Ref UsersTable
+        JWT_SECRET: !Ref JWTSecret
+        CONTACT_EMAIL: !Ref ContactEmail
+        FROM_EMAIL: !Ref FromEmail
+
+# Parameters
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, staging, prod]
+    Description: Environment name
+
+  FrontendUrl:
+    Type: String
+    Default: https://socteamup.com
+    Description: Frontend URL for CORS configuration
+
+  ContactEmail:
+    Type: String
+    Default: support@socteamup.com
+    Description: Email address to receive contact form submissions
+
+  FromEmail:
+    Type: String
+    Default: noreply@socteamup.com
+    Description: Email address for sending automated emails
+
+  JWTSecret:
+    Type: String
+    NoEcho: true
+    Description: Secret key for JWT token generation
+
+  GoogleClientId:
+    Type: String
+    NoEcho: true
+    Description: Google OAuth Client ID
+
+  GoogleClientSecret:
+    Type: String
+    NoEcho: true
+    Description: Google OAuth Client Secret
+
+  GoogleRedirectUri:
+    Type: String
+    Default: https://socteamup.com/api/auth/google/callback
+    Description: Google OAuth redirect URI
+
+# Resources
+Resources:
+  # DynamoDB Table for Users
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub socteamup-users-${Environment}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: googleId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: email-index
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+        - IndexName: googleId-index
+          KeySchema:
+            - AttributeName: googleId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+  # Contact Form Lambda Function
+  ContactFormFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub socteamup-contact-form-${Environment}
+      CodeUri: lambda/
+      Handler: contact-form.handler
+      Description: Handles contact form submissions
+      Events:
+        ContactFormApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SocTeamUpApi
+            Path: /api/contact
+            Method: post
+        ContactFormOptions:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SocTeamUpApi
+            Path: /api/contact
+            Method: options
+      Policies:
+        - SESCrudPolicy:
+            IdentityName: !Ref FromEmail
+
+  # Authentication Lambda Function
+  AuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub socteamup-auth-${Environment}
+      CodeUri: lambda/
+      Handler: auth.handler
+      Description: Handles user authentication
+      Events:
+        AuthRegister:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SocTeamUpApi
+            Path: /api/auth/register
+            Method: post
+        AuthLogin:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SocTeamUpApi
+            Path: /api/auth/login
+            Method: post
+        AuthVerify:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SocTeamUpApi
+            Path: /api/auth/verify
+            Method: get
+        AuthOptions:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SocTeamUpApi
+            Path: /api/auth/{proxy+}
+            Method: options
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UsersTable
+        - SESCrudPolicy:
+            IdentityName: !Ref FromEmail
+
+  # Google Authentication Lambda Function
+  GoogleAuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub socteamup-google-auth-${Environment}
+      CodeUri: lambda/
+      Handler: google-auth.handler
+      Description: Handles Google OAuth authentication
+      Environment:
+        Variables:
+          GOOGLE_CLIENT_ID: !Ref GoogleClientId
+          GOOGLE_CLIENT_SECRET: !Ref GoogleClientSecret
+          GOOGLE_REDIRECT_URI: !Ref GoogleRedirectUri
+      Events:
+        GoogleAuthUrl:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SocTeamUpApi
+            Path: /api/auth/google/auth-url
+            Method: get
+        GoogleCallback:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SocTeamUpApi
+            Path: /api/auth/google/callback
+            Method: post
+        GoogleAuthOptions:
+          Type: Api
+          Properties:
+            RestApiId: !Ref SocTeamUpApi
+            Path: /api/auth/google/{proxy+}
+            Method: options
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UsersTable
+        - SESCrudPolicy:
+            IdentityName: !Ref FromEmail
+
+  # API Gateway
+  SocTeamUpApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub socteamup-api-${Environment}
+      StageName: !Ref Environment
+      Cors:
+        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowOrigin: !Sub "'${FrontendUrl}'"
+        MaxAge: "'600'"
+        AllowCredentials: true
+
+  # CloudWatch Log Groups
+  ContactFormLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/socteamup-contact-form-${Environment}
+      RetentionInDays: 14
+
+  AuthLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/socteamup-auth-${Environment}
+      RetentionInDays: 14
+
+  GoogleAuthLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/socteamup-google-auth-${Environment}
+      RetentionInDays: 14
+
+# Outputs
+Outputs:
+  ApiGatewayUrl:
+    Description: API Gateway endpoint URL
+    Value: !Sub https://${SocTeamUpApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/
+    Export:
+      Name: !Sub ${AWS::StackName}-ApiUrl
+
+  UsersTableName:
+    Description: DynamoDB Users Table Name
+    Value: !Ref UsersTable
+    Export:
+      Name: !Sub ${AWS::StackName}-UsersTable
+
+  ContactFormFunctionArn:
+    Description: Contact Form Lambda Function ARN
+    Value: !GetAtt ContactFormFunction.Arn
+    Export:
+      Name: !Sub ${AWS::StackName}-ContactFormFunction
+
+  AuthFunctionArn:
+    Description: Auth Lambda Function ARN
+    Value: !GetAtt AuthFunction.Arn
+    Export:
+      Name: !Sub ${AWS::StackName}-AuthFunction
+
+  GoogleAuthFunctionArn:
+    Description: Google Auth Lambda Function ARN
+    Value: !GetAtt GoogleAuthFunction.Arn
+    Export:
+      Name: !Sub ${AWS::StackName}-GoogleAuthFunction 
