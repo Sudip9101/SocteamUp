@@ -22,6 +22,15 @@ const getMockUsers = () => [
     name: 'Demo User',
     email: 'demo@socteamup.com',
     password: 'password123', // In production, this would be hashed
+    role: 'user',
+    createdAt: '2024-01-01T00:00:00.000Z'
+  },
+  {
+    userId: 'admin_main',
+    name: 'Admin User',
+    email: 'admin@socteamup.com',
+    password: 'admin123456', // In production, this would be hashed
+    role: 'admin',
     createdAt: '2024-01-01T00:00:00.000Z'
   }
 ];
@@ -98,6 +107,7 @@ export async function POST(request: NextRequest) {
           userId: user.userId,
           email: user.email,
           name: user.name,
+          role: user.role,
           lastLogin: new Date().toISOString(),
         },
       },
