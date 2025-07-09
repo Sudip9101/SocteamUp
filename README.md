@@ -1,83 +1,37 @@
-# SocTeamUp - JAMStack Team Collaboration Platform
+# SocTeamUp Website
 
-![SocTeamUp Logo](https://via.placeholder.com/400x100/2563eb/ffffff?text=SocTeamUp)
-
-A modern, high-performance team collaboration platform built with JAMStack architecture, featuring Next.js 15, TypeScript, Tailwind CSS, and serverless backend integration.
+A modern, responsive website for SocTeamUp - an integrated circuit design and consulting company.
 
 ## 🚀 Features
 
-- **Static Site Generation (SSG)** - Lightning-fast performance with pre-built pages
-- **Modern UI/UX** - Beautiful, responsive design with Tailwind CSS
-- **TypeScript** - Full type safety and enhanced developer experience  
-- **Serverless Ready** - Prepared for AWS Lambda backend integration
-- **Mobile Responsive** - Optimized for all device sizes
-- **SEO Optimized** - Built-in meta tags and performance optimizations
-- **Accessibility** - WCAG compliant components and navigation
+- **Responsive Design**: Optimized for mobile, tablet, and desktop devices
+- **User Authentication**: Login system with role-based access control
+- **User Dashboard**: Personalized dashboard for regular users
+- **Admin Dashboard**: Comprehensive admin panel with real-time metrics
+- **Developer Section**: Resources and documentation for developers
+- **Contact System**: Contact form with backend integration
+- **Settings Management**: User profile and preferences management
 
-## 🏗️ Architecture
+## 🛠️ Tech Stack
 
-This project follows JAMStack principles:
+- **Framework**: Next.js 15.3.4 with Turbopack
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Deployment**: Ready for Vercel, Netlify, or AWS
 
-- **J**avaScript - React/Next.js frontend with TypeScript
-- **A**PIs - Serverless functions (AWS Lambda) for backend logic
-- **M**arkup - Static HTML generated at build time
-
-### Tech Stack
-
-**Frontend:**
-- Next.js 15 with App Router
-- React 18 with TypeScript
-- Tailwind CSS for styling
-- Lucide React for icons
-- ESLint for code quality
-
-**Backend (Serverless):**
-- AWS Lambda functions
-- API Gateway integration
-- JWT authentication
-- Form submission handling
-- Real-time notifications
-
-**Deployment:**
-- Static site hosting (Vercel/Netlify)
-- CDN distribution
-- Edge computing support
-
-## 📁 Project Structure
-
-```
-socteamup-website/
-├── src/
-│   ├── app/                 # Next.js App Router pages
-│   │   ├── about/          # About Us page
-│   │   ├── contact/        # Contact Us page  
-│   │   ├── developers/     # Developer resources
-│   │   ├── login/          # Authentication page
-│   │   ├── layout.tsx      # Root layout component
-│   │   ├── page.tsx        # Home page
-│   │   └── globals.css     # Global styles
-│   └── components/         # Reusable React components
-│       ├── layout/         # Layout components (Navbar, Footer)
-│       └── ui/             # UI components
-├── public/                 # Static assets
-├── lambda/                 # Serverless functions (to be added)
-├── next.config.js         # Next.js configuration
-├── tailwind.config.ts     # Tailwind CSS configuration
-└── package.json           # Dependencies and scripts
-```
-
-## 🛠️ Getting Started
+## 🏃‍♂️ Quick Start
 
 ### Prerequisites
 
-- Node.js 18.0 or higher
-- npm or yarn package manager
+- Node.js 18+ 
+- npm or yarn
 
 ### Installation
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/yourusername/socteamup-website.git
 cd socteamup-website
 ```
 
@@ -91,192 +45,125 @@ npm install
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) to view the application.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-### Available Scripts
+## 🔐 Demo Credentials
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run export` - Export static site
+### Regular User
+- **Email**: demo@socteamup.com
+- **Password**: password123
 
-## 📱 Pages
+### Admin User
+- **Email**: admin@socteamup.com
+- **Password**: admin123456
 
-### 1. Home Page (`/`)
-- Hero section with clear value proposition
-- Feature highlights
-- Call-to-action sections
-- Modern, engaging design
+## 📱 Responsive Design
 
-### 2. About Us (`/about`)
-- Company mission and values
-- Technology stack information
-- Team-focused messaging
-- JAMStack architecture details
+The website is fully responsive with breakpoints for:
+- **Mobile**: 375px - 767px
+- **Tablet**: 768px - 1023px  
+- **Desktop**: 1024px+
 
-### 3. Contact Us (`/contact`)
-- Contact form (ready for serverless integration)
-- Multiple contact methods
-- Interactive design
-- Form validation
+## 🏗️ Project Structure
 
-### 4. Developers (`/developers`)
-- API documentation overview
-- SDK information
-- Code examples
-- Developer community links
-
-### 5. Login (`/login`)
-- Authentication forms
-- Social login options
-- Password visibility toggle
-- Registration/login toggle
-
-## ⚡ Serverless Integration
-
-The project is designed to integrate with AWS Lambda functions for:
-
-### Backend Functionality
-- **User Authentication** - JWT-based auth with social login
-- **Form Processing** - Contact form submissions
-- **User Management** - Registration and profile management
-- **Real-time Features** - Notifications and updates
-- **Search & Analytics** - Content indexing and user analytics
-
-### Example Lambda Function Structure
-```javascript
-// lambda/contact-form.js
-exports.handler = async (event) => {
-  const { name, email, subject, message } = JSON.parse(event.body);
-  
-  // Process form submission
-  // Send email notification
-  // Store in database
-  
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ success: true })
-  };
-};
+```
+socteamup-website/
+├── src/
+│   ├── app/                    # Next.js app directory
+│   │   ├── about/             # About page
+│   │   ├── admin/             # Admin dashboard
+│   │   ├── api/               # API routes
+│   │   ├── contact/           # Contact page
+│   │   ├── dashboard/         # User dashboard
+│   │   ├── developers/        # Developer resources
+│   │   ├── login/             # Login page
+│   │   └── settings/          # Settings page
+│   ├── components/            # Reusable components
+│   │   ├── layout/           # Layout components
+│   │   └── ui/               # UI components
+│   └── lib/                  # Utility functions
+├── public/                   # Static assets
+├── lambda/                   # AWS Lambda functions
+└── content/                  # Developer documentation
 ```
 
-## 🎨 Design System
+## 🌟 Key Features
 
-### Colors
-- Primary: Blue (#2563eb)
-- Secondary: Slate gray (#64748b)
-- Success: Green
-- Warning: Yellow
-- Error: Red
+### Authentication System
+- Role-based access control (User/Admin)
+- Mock authentication for development
+- Secure token-based sessions
 
-### Typography
-- Primary Font: Geist Sans
-- Monospace: Geist Mono
-- Responsive font scaling
+### User Dashboard
+- Welcome section with user info
+- Quick action cards
+- Recent activity tracking
+- Profile information display
 
-### Components
-- Consistent spacing and sizing
-- Hover and focus states
-- Smooth transitions
-- Accessible color contrasts
+### Admin Dashboard
+- Real-time metrics and analytics
+- User management capabilities
+- System monitoring
+- Activity logs
+
+### Developer Resources
+- Comprehensive documentation
+- Downloadable tools and SDKs
+- Code examples and tutorials
+- Version-controlled content
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+1. Push to GitHub
+2. Connect repository to Vercel
+3. Deploy automatically
+
+### Netlify
+1. Push to GitHub
+2. Connect repository to Netlify
+3. Build command: `npm run build`
+4. Publish directory: `.next`
+
+### Manual Build
+```bash
+npm run build
+npm start
+```
 
 ## 🔧 Configuration
 
 ### Environment Variables
-Create a `.env.local` file for environment-specific configuration:
-
-```env
-NEXT_PUBLIC_API_URL=your-api-gateway-url
-NEXT_PUBLIC_AUTH_DOMAIN=your-auth-domain
-AWS_REGION=us-east-1
+Create a `.env.local` file:
+```
+NEXTAUTH_SECRET=your-secret-key
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```
 
-### Deployment Configuration
+### Build Configuration
+The project uses Next.js 15 with:
+- TypeScript for type safety
+- Tailwind CSS for styling
+- ESLint for code quality
 
-**Vercel:**
-```json
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "nextjs"
-}
-```
+## 📞 Support
 
-**Netlify:**
-```toml
-[build]
-  command = "npm run build && npm run export"
-  publish = "dist"
-```
+- **Website**: [https://socteamup.com](https://socteamup.com)
+- **Email**: contact@socteamup.com
+- **Documentation**: Available in `/developers` section
 
-## 🚀 Deployment
+## 📄 License
 
-### Static Site Deployment
-
-1. **Build the project:**
-```bash
-npm run build
-npm run export
-```
-
-2. **Deploy to your preferred platform:**
-   - Vercel (recommended for Next.js)
-   - Netlify
-   - AWS S3 + CloudFront
-   - GitHub Pages
-
-### Serverless Functions
-
-Deploy AWS Lambda functions using:
-- AWS SAM
-- Serverless Framework
-- AWS CDK
-- Vercel Functions (alternative)
-
-## 📈 Performance
-
-- **Lighthouse Score:** 95+ (Performance, Accessibility, Best Practices, SEO)
-- **Core Web Vitals:** Optimized
-- **Bundle Size:** Minimized with tree shaking
-- **Image Optimization:** Next.js automatic optimization
-- **Caching:** CDN and browser caching strategies
-
-## 🔒 Security
-
-- **Content Security Policy (CSP)**
-- **HTTPS everywhere**
-- **Secure headers**
-- **Input validation**
-- **XSS protection**
-- **CSRF protection**
+© 2024 SocTeamUp. All rights reserved.
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-- **Email:** support@socteamup.com
-- **Documentation:** [docs.socteamup.com](https://docs.socteamup.com)
-- **Discord:** [Join our community](https://discord.gg/socteamup)
-- **GitHub Issues:** [Report bugs](https://github.com/socteamup/issues)
-
-## 🙏 Acknowledgments
-
-- Next.js team for the amazing framework
-- Tailwind CSS for the utility-first CSS framework
-- Lucide for the beautiful icon set
-- Vercel for hosting and deployment platform
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
 ---
 
-**Built with ❤️ by the SocTeamUp Team**
+**Built with ❤️ by the SocTeamUp team**
