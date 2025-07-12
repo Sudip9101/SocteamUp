@@ -5,13 +5,14 @@ import Image from 'next/image';
 import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react';
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = BlogContentManager.getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = BlogContentManager.getPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -204,7 +205,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = BlogContentManager.getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = BlogContentManager.getPostBySlug(slug);
   
   if (!post) {
     return {

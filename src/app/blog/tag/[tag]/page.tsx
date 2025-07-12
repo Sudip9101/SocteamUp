@@ -5,13 +5,14 @@ import Image from 'next/image';
 import { ArrowLeft, Tag as TagIcon } from 'lucide-react';
 
 interface TagPageProps {
-  params: {
+  params: Promise<{
     tag: string;
-  };
+  }>;
 }
 
-export default function TagPage({ params }: TagPageProps) {
-  const decodedTag = decodeURIComponent(params.tag);
+export default async function TagPage({ params }: TagPageProps) {
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
   const posts = BlogContentManager.getPostsByTag(decodedTag);
   const allTags = BlogContentManager.getAllTags();
 
@@ -162,7 +163,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: TagPageProps) {
-  const decodedTag = decodeURIComponent(params.tag);
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
   
   return {
     title: `Posts tagged "${decodedTag}" - SocTeamUp Blog`,

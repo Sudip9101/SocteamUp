@@ -5,15 +5,16 @@ import Image from 'next/image';
 import { ArrowLeft, Folder } from 'lucide-react';
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     category: string;
-  };
+  }>;
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const posts = BlogContentManager.getPostsByCategory(params.category);
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { category } = await params;
+  const posts = BlogContentManager.getPostsByCategory(category);
   const categories = BlogContentManager.getCategories();
-  const currentCategory = categories.find(cat => cat.id === params.category);
+  const currentCategory = categories.find(cat => cat.id === category);
 
   if (!currentCategory || posts.length === 0) {
     notFound();
@@ -75,16 +76,16 @@ export default function CategoryPage({ params }: CategoryPageProps) {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Other Categories</h3>
                 <div className="space-y-2">
                   {categories
-                    .filter(cat => cat.id !== params.category)
-                    .map((category) => (
+                    .filter(cat => cat.id !== category)
+                    .map((cat) => (
                       <Link
-                        key={category.id}
-                        href={`/blog/category/${category.id}`}
+                        key={cat.id}
+                        href={`/blog/category/${cat.id}`}
                         className="flex items-center justify-between py-2 px-3 rounded-md hover:bg-gray-50 transition-colors"
                       >
-                        <span className="text-gray-700">{category.name}</span>
+                        <span className="text-gray-700">{cat.name}</span>
                         <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                          {category.count}
+                          {cat.count}
                         </span>
                       </Link>
                     ))}
@@ -166,8 +167,9 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: CategoryPageProps) {
+  const { category } = await params;
   const categories = BlogContentManager.getCategories();
-  const currentCategory = categories.find(cat => cat.id === params.category);
+  const currentCategory = categories.find(cat => cat.id === category);
   
   if (!currentCategory) {
     return {
