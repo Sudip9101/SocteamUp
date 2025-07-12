@@ -68,12 +68,12 @@ Content goes here...
 import socteamup
 client = socteamup.Client()
 \`\`\`
-  `,
+  
   files: [
     // Files array (see next section)
   ]
 }
-```
+
 
 ### 2. Adding Downloadable Files
 

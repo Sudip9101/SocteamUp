@@ -1,0 +1,23 @@
+# Blog Images Directory
+
+This directory contains blog-related images:
+- Cover images for blog posts
+- Author avatars
+- Inline images for blog content
+
+## Image Files:
+- ai-semiconductor-design.jpg
+- foundry-partnership.jpg
+- riscv-tutorial.jpg
+- chiplets-trends.jpg
+- quantum-hybrid.jpg
+
+## Avatar Files:
+- sarah-chen.jpg
+- michael-rodriguez.jpg
+- james-liu.jpg
+- emily-watson.jpg
+- alex-quantum.jpg
+
+Note: In a real implementation, these would be actual image files.
+For now, they serve as placeholders to show the blog structure. 

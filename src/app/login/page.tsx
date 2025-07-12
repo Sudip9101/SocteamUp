@@ -65,15 +65,11 @@ export default function LoginPage() {
       // Reset form
       setFormData({ email: '', password: '', confirmPassword: '', name: '' });
       
-      // Show success message for 2 seconds then redirect to appropriate dashboard
+      // Show success message for 2 seconds then redirect to dashboard
       setTimeout(() => {
         setSubmitStatus('idle');
-        // Redirect based on user role
-        if (result.user && result.user.role === 'admin') {
-          window.location.href = '/admin/dashboard';
-        } else {
-          window.location.href = '/dashboard';
-        }
+        // Redirect to dashboard
+        window.location.href = '/dashboard';
       }, 2000);
 
     } catch (error) {
@@ -152,15 +148,11 @@ export default function LoginPage() {
           // Reset form
           setFormData({ email: '', password: '', confirmPassword: '', name: '' });
           
-          // Show success message for 2 seconds then redirect to appropriate dashboard
+          // Show success message for 2 seconds then redirect to dashboard
           setTimeout(() => {
             setSubmitStatus('idle');
-            // Redirect based on user role
-            if (callbackResult.user && callbackResult.user.role === 'admin') {
-              window.location.href = '/admin/dashboard';
-            } else {
-              window.location.href = '/dashboard';
-            }
+            // Redirect to dashboard
+            window.location.href = '/dashboard';
           }, 2000);
         }
       } else {

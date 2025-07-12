@@ -127,3 +127,330 @@ body {
 .card-image {
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
+/* Blog-specific animations */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.animate-slideInDown {
+  animation: slideInDown 0.6s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.5s ease-out;
+}
+
+/* Blog Card Hover Effects */
+.blog-card {
+  transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Featured Blog Card Hover Effects */
+.featured-blog-card {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.featured-blog-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.featured-blog-card:hover .featured-blog-image {
+  transform: scale(1.05);
+}
+
+.featured-blog-image {
+  transition: transform 0.3s ease;
+}
+
+/* Blog Content Animations */
+.blog-content {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  transition: color 0.2s ease;
+}
+
+.blog-content h1:hover,
+.blog-content h2:hover,
+.blog-content h3:hover,
+.blog-content h4:hover {
+  color: #2563eb;
+}
+
+/* Blog Tag Hover Effects */
+.blog-tag {
+  transition: all 0.2s ease;
+}
+
+.blog-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Team Section Animations */
+.team-slide {
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.team-member-card {
+  transition: all 0.4s ease;
+}
+
+.team-member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.team-contact-link {
+  transition: all 0.3s ease;
+}
+
+.team-contact-link:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.team-nav-button {
+  transition: all 0.3s ease;
+}
+
+.team-nav-button:hover {
+  transform: scale(1.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.team-nav-button:active {
+  transform: scale(1.05);
+}
+
+.team-indicator {
+  transition: all 0.3s ease;
+}
+
+.team-indicator:hover {
+  transform: scale(1.3);
+}
+
+.team-indicator:active {
+  transform: scale(1.1);
+}
+
+/* Team Image Animations */
+.team-image {
+  transition: all 0.5s ease;
+}
+
+.team-member-card:hover .team-image {
+  transform: scale(1.08);
+}
+
+/* Team Content Animation on Slide Change */
+@keyframes teamContentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-content-animate {
+  animation: teamContentFadeIn 0.8s ease-out;
+}
+
+/* Enhanced Scale Animation for Team Elements */
+@keyframes teamScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.team-scale-in {
+  animation: teamScaleIn 0.6s ease-out;
+}
+
+/* Staggered Animation for Team Stats */
+.team-stat-enhanced {
+  animation: teamScaleIn 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.team-stat-enhanced:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.team-stat-enhanced:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.team-stat-enhanced:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.team-stat-enhanced:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Professional Placeholder Animation */
+.professional-placeholder {
+  animation: pulse 3s infinite;
+}
+
+/* Enhanced hover effects for team section */
+.team-section-hover {
+  transition: all 0.3s ease;
+}
+
+.team-section-hover:hover {
+  transform: translateY(-1px);
+}
+
+/* Expertise Tags Animation */
+.expertise-tag {
+  transition: all 0.2s ease;
+}
+
+.expertise-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* Team Stats Animation */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-stat {
+  animation: countUp 0.8s ease-out;
+}
+
+.team-stat:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.team-stat:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.team-stat:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.team-stat:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Image Placeholder Animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.image-placeholder {
+  animation: pulse 2s infinite;
+}
+
+/* Responsive Animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-slideInLeft,
+  .animate-slideInRight,
+  .animate-slideInUp,
+  .animate-slideInDown,
+  .animate-scaleIn {
+    animation: none;
+  }
+  
+  .blog-card:hover,
+  .featured-blog-card:hover,
+  .team-member-card:hover,
+  .team-contact-link:hover,
+  .team-nav-button:hover {
+    transform: none;
+  }
+  
+  .team-stat {
+    animation: none;
+  }
+}
