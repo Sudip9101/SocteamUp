@@ -121,7 +121,7 @@ Specializing in the development of cutting-edge Intellectual Properties (IPs), S
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 slide-in-left">
             <span className="block slide-delay-1">Reinventing<span className="text-blue-600"> SOC</span></span>
-            <span className="block slide-delay-2">Together!!</span>
+            <span className="block slide-delay-2">Design</span>
           </h1>
         </div>
       </div>
